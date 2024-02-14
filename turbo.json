@@ -1,0 +1,54 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local", "./.env*"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^lint", "^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": ["PORT", "NODE_ENV"],
+      "dotEnv": [
+        ".env.production.local",
+        ".env.local",
+        ".env.production",
+        ".env"
+      ]
+    },
+    "dev:api": {
+      "persistent": false,
+      "env": ["PORT", "NODE_ENV"],
+      "dotEnv": [
+        ".env.production.local",
+        ".env.local",
+        ".env.production",
+        ".env"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "dev": {
+      "persistent": false,
+      "env": ["PORT", "NODE_ENV"],
+      "dotEnv": [
+        ".env.production.local",
+        ".env.local",
+        ".env.production",
+        ".env"
+      ]
+    },
+    "clean": {
+      "persistent": false
+    },
+    "clean:docs": {
+      "persistent": false
+    },
+    "depcheck": {
+      "persistent": false
+    },
+    "start": {
+      "dependsOn": ["^lint", "^build"],
+      "persistent": false
+    },
+    "generateDocs": {}
+  }
+}
